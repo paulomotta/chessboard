@@ -27,4 +27,15 @@ public class Chessboard {
         return tmp;
     }
     
+    public int nameToColumn(String column){
+        column = column.toLowerCase();
+        int size = column.length();
+        if (size <= 0) throw new IllegalArgumentException("Invalid column name ["+column+"]");
+        int index = 0;
+        for (int i = 0; i < size; i++) {
+            index += (column.charAt(i) - 'a') + (26 * i);
+        }
+        return index;
+    }
+    
 }
