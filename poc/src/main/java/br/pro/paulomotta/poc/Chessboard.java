@@ -1,5 +1,8 @@
 package br.pro.paulomotta.poc;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author paulo
@@ -36,6 +39,13 @@ public class Chessboard {
             index += (column.charAt(i) - 'a') + (26 * i);
         }
         return index;
+    }
+    
+    public List<String> possibleMoves(String start, String piece){
+        List<String> result = new ArrayList<>();
+        result.add("f2");
+        result.add("g3");
+        return result;
     }
     
 }
