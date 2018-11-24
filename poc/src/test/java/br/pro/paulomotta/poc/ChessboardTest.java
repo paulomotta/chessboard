@@ -28,7 +28,8 @@ public class ChessboardTest {
     @Parameterized.Parameters
     public static Collection positions() {
         return Arrays.asList(new Object[][]{
-            {"a1", new String[]{"a","1"}}
+            {"a1", new String[]{"a", "1"}},
+            {"a", null},
         });
     }
 
@@ -40,26 +41,21 @@ public class ChessboardTest {
     public void tearDown() {
     }
 
-    /**
-     * Test of splitColumnRow method, of class Chessboard.
-     */
-    @Test
-    public void testSplitColumnRow() {
-        System.out.println("splitColumnRow");
-        String position = "";
-        Chessboard instance = new Chessboard();
-        String[] expResult = null;
-        String[] result = instance.splitColumnRow(position);
-        assertArrayEquals(expResult, result);
-        // TODO review the generated test code and remove the default call to fail.
-        fail("The test case is a prototype.");
-    }
-
     @Test
     public void testPositions() {
-        System.out.println("Position is : " + position);
+        System.out.println("Position is : " + position + " expResult=" + expResult);
         Chessboard instance = new Chessboard();
-        assertArrayEquals(expResult, instance.splitColumnRow(position));
+
+        if (expResult == null) {
+            try {
+                String[] result = instance.splitColumnRow(position);
+                fail("Where is the exception?");
+            } catch (IllegalArgumentException ex) {
+                //ok
+            }
+        } else {
+            assertArrayEquals(expResult, instance.splitColumnRow(position));
+        }
     }
 
 }
