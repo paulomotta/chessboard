@@ -29,9 +29,10 @@ public class ChessboardSplitColumnRowTest {
     public static Collection positions() {
         return Arrays.asList(new Object[][]{
             {"a1", new String[]{"a", "1"}},
-            {"aa1", new String[]{"aa", "1"}},
-            {"aa11", new String[]{"aa", "11"}},
+            {"aa1", null},
+            {"aa11", null},
             {"a11", new String[]{"a", "11"}},
+            {"z11", new String[]{"z", "11"}},
             {"a", null},
             {"1", null},
         });

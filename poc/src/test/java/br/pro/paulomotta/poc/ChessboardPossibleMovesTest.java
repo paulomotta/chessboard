@@ -2,6 +2,7 @@ package br.pro.paulomotta.poc;
 
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import org.junit.After;
 import org.junit.Before;
@@ -31,6 +32,8 @@ public class ChessboardPossibleMovesTest {
     public static Collection positions() {
         return Arrays.asList(new Object[][]{
             {"h1", "Kt", Arrays.asList(new Object[]{"f2","g3"}) },
+            {"g1", "Kt", Arrays.asList(new Object[]{"e2","f3","h3"}) },
+            {"f1", "Kt", Arrays.asList(new Object[]{"d2","e3","g3","h2"}) },
             {"", "", null},
         });
     }
@@ -60,7 +63,10 @@ public class ChessboardPossibleMovesTest {
                 //ok
             }
         } else {
-            assertEquals(expResult, instance.possibleMoves(start, piece));
+            Collections.sort(expResult);
+            List<String> result = instance.possibleMoves(start, piece);
+            Collections.sort(result);
+            assertEquals(expResult, result);
         }
     }
     

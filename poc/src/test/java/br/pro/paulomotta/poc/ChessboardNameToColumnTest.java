@@ -32,10 +32,10 @@ public class ChessboardNameToColumnTest {
             {"z", 25},
             {"aa", 26},
             {"Aa", 26},
-            {"aA", 26},
-            {"AA", 26},
-            {"Abc", 0 + (26 + 1) + ((26 * 2) + 2)},
-            {"AbC", 0 + (26 + 1) + ((26 * 2) + 2)},
+            {"aA", -1},
+            {"AA", -1},
+            {"Abc", -1},
+            {"AbC", -1},
             {"", -1},
         });
     }
@@ -58,9 +58,9 @@ public class ChessboardNameToColumnTest {
         System.out.println("Column is : " + column + " expResult=" + expResult);
         Chessboard instance = new Chessboard();
 
-        if (expResult == -1) {
+        if (expResult < 0 || expResult > 25) {
             try {
-                String[] result = instance.splitColumnRow(column);
+                int result = instance.nameToColumn(column);
                 fail("Where is the exception?");
             } catch (IllegalArgumentException ex) {
                 //ok
@@ -70,4 +70,25 @@ public class ChessboardNameToColumnTest {
         }
     }
     
+    /**
+     * Test of ColumnToName method, of class Chessboard.
+     */
+    @Test
+    public void testColumnToName() {
+        System.out.println("ColumnToName");
+        
+        System.out.println("Column is : " + expResult + " name=" + column);
+        Chessboard instance = new Chessboard();
+
+        if (expResult < 0 || expResult > 25) {
+            try {
+                String result = instance.columnToName(expResult);
+                fail("Where is the exception?");
+            } catch (IllegalArgumentException ex) {
+                //ok
+            }
+        } else {
+            assertEquals(column, instance.columnToName(expResult));
+        }
+    }
 }
