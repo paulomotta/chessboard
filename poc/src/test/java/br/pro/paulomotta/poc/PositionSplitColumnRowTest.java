@@ -3,7 +3,6 @@ package br.pro.paulomotta.poc;
 import java.util.Arrays;
 import java.util.Collection;
 import org.junit.runners.Parameterized;
-import org.junit.runners.Parameterized.Parameters;
 import org.junit.runner.RunWith;
 import org.junit.After;
 import org.junit.Before;
@@ -15,12 +14,12 @@ import static org.junit.Assert.*;
  * @author paulo
  */
 @RunWith(Parameterized.class)
-public class ChessboardSplitColumnRowTest {
+public class PositionSplitColumnRowTest {
 
     String position;
     String[] expResult;
 
-    public ChessboardSplitColumnRowTest(String position, String[] result) {
+    public PositionSplitColumnRowTest(String position, String[] result) {
         this.position = position;
         this.expResult = result;
     }
@@ -49,17 +48,16 @@ public class ChessboardSplitColumnRowTest {
     @Test
     public void testPositions() {
         System.out.println("Position is : " + position + " expResult=" + expResult);
-        Chessboard instance = new Chessboard();
 
         if (expResult == null) {
             try {
-                String[] result = instance.splitColumnRow(position);
+                String[] result = Position.splitColumnRow(position);
                 fail("Where is the exception?");
             } catch (IllegalArgumentException ex) {
                 //ok
             }
         } else {
-            assertArrayEquals(expResult, instance.splitColumnRow(position));
+            assertArrayEquals(expResult, Position.splitColumnRow(position));
         }
     }
 

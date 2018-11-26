@@ -14,12 +14,12 @@ import org.junit.runners.Parameterized;
  * @author paulo
  */
 @RunWith(Parameterized.class)
-public class ChessboardNameToColumnTest {
+public class PositionNameToColumnTest {
     
     String column;
     int expResult;
 
-    public ChessboardNameToColumnTest(String column, int expResult) {
+    public PositionNameToColumnTest(String column, int expResult) {
         this.column = column;
         this.expResult = expResult;
     }
@@ -56,17 +56,16 @@ public class ChessboardNameToColumnTest {
         System.out.println("nameToColumn");
         
         System.out.println("Column is : " + column + " expResult=" + expResult);
-        Chessboard instance = new Chessboard();
 
         if (expResult < 0 || expResult > 25) {
             try {
-                int result = instance.nameToColumn(column);
+                int result = Position.nameToColumn(column);
                 fail("Where is the exception?");
             } catch (IllegalArgumentException ex) {
                 //ok
             }
         } else {
-            assertEquals(expResult, instance.nameToColumn(column));
+            assertEquals(expResult, Position.nameToColumn(column));
         }
     }
     
@@ -78,17 +77,16 @@ public class ChessboardNameToColumnTest {
         System.out.println("ColumnToName");
         
         System.out.println("Column is : " + expResult + " name=" + column);
-        Chessboard instance = new Chessboard();
 
         if (expResult < 0 || expResult > 25) {
             try {
-                String result = instance.columnToName(expResult);
+                String result = Position.columnToName(expResult);
                 fail("Where is the exception?");
             } catch (IllegalArgumentException ex) {
                 //ok
             }
         } else {
-            assertEquals(column, instance.columnToName(expResult));
+            assertEquals(column, Position.columnToName(expResult));
         }
     }
 }
