@@ -56,6 +56,6 @@ public class Chessboard {
 
     private boolean isValid(Position p) {
         return (p.col >= 0 && p.col < columns
-                && p.row >= 0 && p.row < columns);
+                && p.row >= 0 && p.row < rows);
     }
 }
