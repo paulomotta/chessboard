@@ -1,6 +1,7 @@
 package br.pro.paulomotta.poc;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -17,31 +18,54 @@ public class Chessboard {
     int columns = MIN_COLUMNS;
     int rows = MIN_ROWS;
 
-    public List<Position> possibleMoves(String start, String piece) {
+    public List<Position> possibleMoves(String start, String piece, int depth) {
         if (start == null || piece == null || start.length() < 1 || piece.length() < 1) {
             throw new IllegalArgumentException("Invalid start [" + start + "] or piece ["+piece+"]");
         }
         
         Position startPos = new Position(start);
 
-        List<Position> positions = calculateValidMovesForPiece(startPos, piece);
-
-        return positions;
-    }
-
-    public List<Position> calculateValidMovesForPiece(Position startPos, String piece) {
-
         ChessPieceMover mover = ChessPieceMoverFactory.createChessPieceMover(piece);
         
-        List<Position> positions = mover.moves(startPos);
         List<Position> result = new ArrayList<>();
+        HashMap<Integer,List<Position>> level = new HashMap<>();
         
-        for (Position p : positions){
-            if (isValid(p)) {
-                result.add(p);
+        //level.put(0, mover.moves(startPos));
+        for(int i=0; i < depth; i++){
+            List<Position> positions = new ArrayList<>();
+            
+            List<Position> candidateList = null;
+            if (i == 0) {
+                candidateList = new ArrayList<>();
+                candidateList.add(startPos);
+            } else {
+                candidateList = level.get(i-1);
+            }
+            
+            System.out.println("candidateList="+candidateList);
+            for (Position candidate : candidateList){
+                List<Position> tmpPos = mover.moves(candidate);
+                positions.addAll(tmpPos);
+            }
+            
+            List<Position> levelResult = new ArrayList<>();
+            for (Position p : positions){
+                if (isValid(p) && !result.contains(p)) {
+                    levelResult.add(p);
+                }
+            }
+            level.put(i,levelResult);
+        }
+
+        //TODO check better implemntation, List is slow for this verification
+        for(List<Position> moves : level.values()){
+            for(Position p : moves) {
+                if (!result.contains(p)){
+                    result.add(p);
+                }
             }
         }
-        
+        System.out.println("result="+result);
         return result;
     }
 

@@ -24,7 +24,36 @@ public class Position {
 
     @Override
     public String toString() {
-        return "Position{" + "col=" + col + ", row=" + row + '}';
+        return "Position{" + positionToAlgebraic(this)+"(" + col + "," + row + ")}";
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 37 * hash + this.col;
+        hash = 37 * hash + this.row;
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Position other = (Position) obj;
+        if (this.col != other.col) {
+            return false;
+        }
+        if (this.row != other.row) {
+            return false;
+        }
+        return true;
     }
     
     public static String[] splitColumnRow(String position) {
