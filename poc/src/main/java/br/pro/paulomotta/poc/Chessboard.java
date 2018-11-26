@@ -17,6 +17,46 @@ public class Chessboard {
 
     int columns = MIN_COLUMNS;
     int rows = MIN_ROWS;
+    
+    public boolean addColumn(){
+        int c = this.columns + 1;
+        if (c <= MAX_COLUMNS){
+            this.columns = c;
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public boolean removeColumn(){
+        int c = this.columns - 1;
+        if (c >= MIN_COLUMNS){
+            this.columns = c;
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public boolean addRow(){
+        int c = this.rows + 1;
+        if (c <= MAX_ROWS){
+            this.rows = c;
+            return true;
+        } else {
+            return false;
+        }
+    }
+    
+    public boolean removeRow(){
+        int c = this.rows - 1;
+        if (c >= MIN_ROWS){
+            this.rows = c;
+            return true;
+        } else {
+            return false;
+        }
+    }
 
     public List<Position> possibleMoves(String start, String piece, int depth) {
         if (start == null || piece == null || start.length() < 1 || piece.length() < 1) {
@@ -69,7 +109,7 @@ public class Chessboard {
         return result;
     }
 
-    private boolean isValid(Position p) {
+    protected boolean isValid(Position p) {
         return (p.col >= 0 && p.col < columns
                 && p.row >= 0 && p.row < rows);
     }
