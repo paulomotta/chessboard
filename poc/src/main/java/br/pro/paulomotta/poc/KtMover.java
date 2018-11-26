@@ -12,6 +12,9 @@ public class KtMover implements ChessPieceMover {
     @Override
     public List<Position> moves(Position startPos){
         List<Position> positions = new ArrayList<>();
+        if (startPos == null) {
+            return positions;
+        }
         positions.add(new Position(startPos.col + 2, startPos.row + 1));
         positions.add(new Position(startPos.col + 2, startPos.row - 1));
         positions.add(new Position(startPos.col - 2, startPos.row + 1));
