@@ -97,7 +97,7 @@ public class Position {
         return String.valueOf(c);
     }
     
-    private static String positionToAlgebraic(Position p) {
+    public static String positionToAlgebraic(Position p) {
         String c = columnToName(p.col);
         return c + (p.row + 1);
     }

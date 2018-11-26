@@ -109,6 +109,16 @@ public class Chessboard {
         return result;
     }
 
+    public List<String> possibleMovesInAlgebraicNotation(String start, String piece, int depth){
+        List<String> result = new ArrayList<>();
+        
+        List<Position> moves = possibleMoves(start, piece, depth);
+        for (Position p : moves){
+            result.add(Position.positionToAlgebraic(p));
+        }
+        
+        return result;
+    }
     protected boolean isValid(Position p) {
         return (p.col >= 0 && p.col < columns
                 && p.row >= 0 && p.row < rows);
