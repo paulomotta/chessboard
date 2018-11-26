@@ -70,7 +70,6 @@ public class Chessboard {
         List<Position> result = new ArrayList<>();
         HashMap<Integer,List<Position>> level = new HashMap<>();
         
-        //level.put(0, mover.moves(startPos));
         for(int i=0; i < depth; i++){
             List<Position> positions = new ArrayList<>();
             
@@ -82,7 +81,6 @@ public class Chessboard {
                 candidateList = level.get(i-1);
             }
             
-            System.out.println("candidateList="+candidateList);
             for (Position candidate : candidateList){
                 List<Position> tmpPos = mover.moves(candidate);
                 positions.addAll(tmpPos);
@@ -105,7 +103,6 @@ public class Chessboard {
                 }
             }
         }
-        System.out.println("result="+result);
         return result;
     }
 
