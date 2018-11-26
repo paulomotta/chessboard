@@ -41,7 +41,7 @@ public class Position {
         }
         
         try {
-            int r = Integer.parseInt(row);
+            Integer.parseInt(row);
         } catch (NumberFormatException e) {
             throw new IllegalArgumentException("Invalid position [" + position + "]");
         }
