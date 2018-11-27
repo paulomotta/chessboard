@@ -24,7 +24,10 @@
                 </c:forEach>
 
             </table>
-                        
+            Number of turns:
+            <h:commandButton actionListener="#{chessboardBean.removeTurn()}" value="-" />
+            <h:outputText value="#{chessboardBean.turns}" />
+            <h:commandButton actionListener="#{chessboardBean.addTurn()}" value="+" /><br/>   
             <h:commandButton actionListener="#{chessboardBean.addColumn()}" value="Add Column" /><br/>
             <h:commandButton actionListener="#{chessboardBean.removeColumn()}" value="Remove Column" /><br/>
             <h:commandButton actionListener="#{chessboardBean.addRow()}" value="Add Row" /><br/>

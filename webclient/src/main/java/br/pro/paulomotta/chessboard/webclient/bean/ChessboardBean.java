@@ -25,12 +25,13 @@ public class ChessboardBean {
 
    
 
-    Set<String> moves = new TreeSet<>();
-    List<Row> rows = new ArrayList<>();
-    int numRows = 8;
-    int numColumns = 8;
-    int lastColumn = numColumns + 1;
-    int lastRow = numRows + 1;
+    private Set<String> moves = new TreeSet<>();
+    private List<Row> rows = new ArrayList<>();
+    private int numRows = 8;
+    private int numColumns = 8;
+    private int lastColumn = numColumns + 1;
+    private int lastRow = numRows + 1;
+    private int turns = 2;
 
     /**
      * Creates a new instance of ChessboardBean
@@ -54,7 +55,7 @@ public class ChessboardBean {
     public void moves(String position) {
         System.out.println("position=" + position);
 
-        List lista = restTemplate().getForObject(createURLWithPort("/moves/Kt/"+position+"/2"), List.class);
+        List lista = restTemplate().getForObject(createURLWithPort("/moves/Kt/"+position+"/"+turns), List.class);
 
         for(Object o:lista){
             System.out.println("o="+o);
@@ -110,7 +111,18 @@ public class ChessboardBean {
             lastRow = numRows + 1;
             numColumns = 8;
             lastColumn = numColumns + 1;
+            setTurns(2);
             clearBoard();
+        }
+    }
+    
+    public void addTurn(){
+        turns++;
+    }
+    
+    public void removeTurn(){
+        if (turns>0){
+            turns--;
         }
     }
 
@@ -165,6 +177,20 @@ public class ChessboardBean {
         char col = (char) ('a' + j - 1);
         int row = i;
         return String.valueOf(col + "" + row);
+    }
+
+    /**
+     * @return the turns
+     */
+    public int getTurns() {
+        return turns;
+    }
+
+    /**
+     * @param turns the turns to set
+     */
+    public void setTurns(int turns) {
+        this.turns = turns;
     }
 
 }
