@@ -17,7 +17,7 @@ since it could be both "ab" or "ba" and solving this ambiguity will provide
 little extra value for now. It could be addressed in a future version with a
 different board indexing scheme. 
 
-##Structure
+## Structure
 The project has a core library that implements the business rules as POJOs
 
 The core is exposed as a service through the api project and uses Spring to 
@@ -27,11 +27,11 @@ It also uses Spring Data to persist information to the H2 database using JPA.
 The web client is based on Java Server Faces and uses Spring to become a 
 self-contained executable war. It is configured to listen on 8080.
 
-##Deployed version
+## Deployed version
 The project is running at AWS and may be accessed here:
 http://ec2-3-17-28-134.us-east-2.compute.amazonaws.com:8080/index.xhtml
 
-##Timeline of the development
+## Timeline of the development
 The project was refactored many times on the core where the algorithms to solve
 the problem were implemented. 
 The first idea was to generate all the possible moves for a certain piece on a
@@ -44,14 +44,14 @@ This algorithm may be used for as many turns as we want and since it uses a
 ChessPieceMover interface with a Factory we can implement different movers for
 the other pieces.
 
-##Tools
+## Tools
 I have used NetBeans 8.2 as my IDE so all the builds were executed inside the 
 IDE, I have also created the spotbugs:spotbugs action to check for possible 
 bugs during the development. Currently there are some style (less than minor) 
 bugs of possible null returns inside the service that were reported by spotbugs
 but couldn't be corrected.
 
-##Miscelaneous Comments
+## Miscelaneous Comments
 - At first I considered creating a separated service for the algebraic notation but it felt like to much infrastructure just o have another service. Although there are many parts that use the translation from position to algebraic notation it would be costly to send the Strings back and forth for all the computation steps.
 - The core Position class uses a hardcoded maximum value of 25 and it could use the Chessboard constant, however that would incur in a circular reference and I couldn't decide on what would be the lesser evil at the time.
 - The UI chessboard algorithm is very similar to the internal one but focused on the structure of the board to be drawn to the screen, it was a late night piece and need a good refactoring
