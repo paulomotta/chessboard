@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.BDDAssertions.then;
 import org.json.JSONException;
+import static org.junit.Assert.assertEquals;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -63,6 +64,22 @@ public class ChessboardApplicationTests {
 
     private String createURLWithPort(String uri) {
         return "http://localhost:" + port + uri;
+    }
+    
+    @Test
+    public void testAddColumn() throws JSONException {
+
+        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+
+        ResponseEntity<Boolean> response = testRestTemplate.exchange(
+                createURLWithPort("/add/column"),
+                HttpMethod.POST, entity, Boolean.class);
+
+        Boolean expected = true;
+
+        Boolean b = response.getBody();
+        System.out.println("s="+b);
+        assertEquals(expected, b);
     }
 
 }

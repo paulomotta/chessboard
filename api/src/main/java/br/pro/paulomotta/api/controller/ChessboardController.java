@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
  */
 @Controller
 public class ChessboardController {
+    Chessboard board = new Chessboard();
     
     @GetMapping("/moves/{piece}/{start}/{turns}")
     @ResponseBody
@@ -26,12 +28,17 @@ public class ChessboardController {
         
         List<PositionDTO> moves = new ArrayList<>();
         
-        Chessboard board = new Chessboard();
         List<Position> calculated = board.possibleMoves(start, piece, turns);
         for (Position position : calculated) {
             moves.add(new PositionDTO(Position.positionToAlgebraic(position)));
         }
         
         return moves;
+    }
+    
+    @PostMapping("/add/column")
+    @ResponseBody
+    public Boolean addColumn(){
+        return board.addColumn();
     }
 }
