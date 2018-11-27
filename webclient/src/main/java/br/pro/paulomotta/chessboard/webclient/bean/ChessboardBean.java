@@ -9,14 +9,7 @@ import java.util.Set;
 import java.util.TreeSet;
 import org.ocpsoft.rewrite.annotation.Join;
 import org.ocpsoft.rewrite.el.ELBeanName;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.client.RestTemplateBuilder;
-import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Scope;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -62,10 +55,6 @@ public class ChessboardBean {
         System.out.println("position=" + position);
 
         List lista = restTemplate().getForObject(createURLWithPort("/moves/Kt/"+position+"/2"), List.class);
-//        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
-//        ResponseEntity<String> response = testRestTemplate.exchange(
-//                createURLWithPort("/moves/Kt/h1/1"),
-//                HttpMethod.GET, entity, String.class);
 
         for(Object o:lista){
             System.out.println("o="+o);
@@ -73,17 +62,18 @@ public class ChessboardBean {
             
             moves.add(m.get("coordinates"));
         }
-        //moves.add("f2");
-        //moves.add("g3");
         clearBoard();
         moves.clear();
         moves = new TreeSet<>();
     }
 
     public void addColumn() {
-        numColumns++;
-        lastColumn++;
-        clearBoard();
+        Boolean b = restTemplate().postForObject(createURLWithPort("/add/column"), null, Boolean.class);
+        if (b) {
+            numColumns++;
+            lastColumn++;
+            clearBoard();
+        }
     }
 
     public void removeColumn() {
