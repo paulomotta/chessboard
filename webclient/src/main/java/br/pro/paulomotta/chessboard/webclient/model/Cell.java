@@ -9,6 +9,7 @@ public class Cell {
     private String name;
     private int color;
     private String bgColor;
+    private String textColor;
     
     public String getName(){
         return name;
@@ -32,12 +33,14 @@ public class Cell {
     }
     
     public String getTextColor() {
+        if (textColor != null) return textColor;
         if (bgColor != null) return "#000000";
         if (label) return "#CCCCCC";
         return (color!=0?"#000000":"#FFFFFF");
     }
     
     public void setTextColor(String s) {
+        this.textColor = s;
     }
     /**
      * @param color the color to set

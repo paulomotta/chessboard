@@ -161,6 +161,7 @@ public class ChessboardBean {
                     if (moves.contains(pos)) {
                         p.setName("Kt");
                         p.setBgColor("cyan");
+                        p.setTextColor("black");
                     } else {
                         p.setName(pos);
                     }
