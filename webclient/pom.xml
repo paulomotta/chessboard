@@ -56,11 +56,6 @@
             <artifactId>rewrite-config-prettyfaces</artifactId>
             <version>3.4.1.Final</version>
         </dependency>
-        <dependency>  
-            <groupId>org.primefaces</groupId>  
-            <artifactId>primefaces</artifactId>  
-            <version>6.2</version>  
-        </dependency>
     </dependencies>
 
     <build>
