@@ -9,7 +9,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 /**
- *
+ * This is the class to start the chessboard service application
  * @author paulo
  */
 @SpringBootApplication

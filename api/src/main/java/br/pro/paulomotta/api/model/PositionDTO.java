@@ -1,7 +1,8 @@
 package br.pro.paulomotta.api.model;
 
 /**
- *
+ * This is a DTO to return the coordinates to the web client
+ * 
  * @author paulo
  */
 public class PositionDTO {

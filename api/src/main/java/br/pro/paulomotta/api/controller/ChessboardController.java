@@ -15,7 +15,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
- *
+ * This class exposes the entry points to the service. It does not implement the
+ * logic.
+ * 
+ * Since we are allowing the user to add/remove columns/rows we have to keep 
+ * the state for it in the Chessboard object
+ * 
  * @author paulo
  */
 @Controller
@@ -25,6 +30,15 @@ public class ChessboardController {
     @Autowired
     RequestRepository repo;
     
+    /**
+     * This method calls the board method that calculates the possible moves
+     * for the given piece, at the given start position and the number of turns
+     * 
+     * @param piece the piece (currently we only handle the knight)
+     * @param start the starting position in algebraic notation
+     * @param turns the quantity of turns to be used
+     * @return the List<PositionDTO> of possible moves
+     */
     @GetMapping("/moves/{piece}/{start}/{turns}")
     @ResponseBody
     public List<PositionDTO> possibleMoves(
@@ -44,6 +58,10 @@ public class ChessboardController {
         return moves;
     }
     
+    /**
+     * This method adds a column if possible
+     * @return true if the column was added false otherwise
+     */
     @PostMapping("/add/column")
     @ResponseBody
     public Boolean addColumn(){
@@ -53,6 +71,10 @@ public class ChessboardController {
         return b;
     }
     
+    /**
+     * This method removes a column if possible
+     * @return true if the column was removed false otherwise
+     */
     @PostMapping("/remove/column")
     @ResponseBody
     public Boolean removeColumn(){
@@ -62,6 +84,10 @@ public class ChessboardController {
         return b;
     }
     
+    /**
+     * This method adds a row if possible
+     * @return true if the row was added false otherwise
+     */
     @PostMapping("/add/row")
     @ResponseBody
     public Boolean addRow(){
@@ -71,6 +97,10 @@ public class ChessboardController {
         return b;
     }
     
+    /**
+     * This method removes a row if possible
+     * @return true if the row was removed false otherwise
+     */
     @PostMapping("/remove/row")
     @ResponseBody
     public Boolean removeRow(){
@@ -80,6 +110,11 @@ public class ChessboardController {
         return b;
     }
     
+    /**
+     * This method resets the board
+     * 
+     * @return true if the board was reset false otherwise
+     */
     @PostMapping("/reset")
     @ResponseBody
     public Boolean reset(){
