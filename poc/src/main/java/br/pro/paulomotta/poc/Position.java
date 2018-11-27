@@ -1,7 +1,9 @@
 package br.pro.paulomotta.poc;
 
 /**
- *
+ * This class represents a position on the board and can convert from algebraic
+ * notation to indexes and vice-versa.
+ * 
  * @author paulo
  */
 public class Position {
@@ -56,6 +58,14 @@ public class Position {
         return true;
     }
     
+    /**
+     * This method splits the algebraic notation position into two Strings
+     * 
+     * In case of illegal arguments it throws a Runtime exception
+     * 
+     * @param position the String representing a position
+     * @return an array of String with 0 is the column and 1 is the row
+     */
     public static String[] splitColumnRow(String position) {
         String tmp[] = new String[2];
         String col = "";
@@ -79,6 +89,12 @@ public class Position {
         return tmp;
     }
 
+    /**
+     * This method converts from the column name to the integer index
+     * 
+     * @param column the column name
+     * @return the integer representing its value
+     */
     public static int nameToColumn(String column) {
         column = column.toLowerCase();
         int size = column.length();
@@ -89,6 +105,12 @@ public class Position {
         return index;
     }
 
+    /**
+     * This method converts from the index to the column name
+     * 
+     * @param column the column integer value
+     * @return the column name
+     */
     public static String columnToName(int column) {
         if (column < 0 || column > 25) {
             throw new IllegalArgumentException("Invalid column name [" + column + "]");
@@ -97,6 +119,12 @@ public class Position {
         return String.valueOf(c);
     }
     
+    /**
+     * This methods converts the Position to its algebraic notation
+     * 
+     * @param p the Position
+     * @return the String with the algebraic notation
+     */
     public static String positionToAlgebraic(Position p) {
         String c = columnToName(p.col);
         return c + (p.row + 1);
