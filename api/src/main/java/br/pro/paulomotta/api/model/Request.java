@@ -5,9 +5,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 
 /**
- *
+ * Entity class to persist the request and the corresponding result
+ * 
  * @author paulo
  */
 @Entity
@@ -16,6 +18,7 @@ public class Request implements Serializable {
     @GeneratedValue(strategy=GenerationType.AUTO)
     private Long id;
     private String request;
+    @Lob
     private String result;
 
     protected Request() {}
