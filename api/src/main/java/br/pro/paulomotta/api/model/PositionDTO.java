@@ -14,4 +14,9 @@ public class PositionDTO {
     public PositionDTO(String coordinates) {
         this.coordinates = coordinates;
     }
+
+    @Override
+    public String toString() {
+        return "PositionDTO{" + "coordinates=" + coordinates + '}';
+    }
 }
