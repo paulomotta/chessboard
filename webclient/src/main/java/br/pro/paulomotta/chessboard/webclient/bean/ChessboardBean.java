@@ -77,29 +77,41 @@ public class ChessboardBean {
     }
 
     public void removeColumn() {
-        numColumns--;
-        lastColumn--;
-        clearBoard();
+        Boolean b = restTemplate().postForObject(createURLWithPort("/remove/column"), null, Boolean.class);
+        if (b) {
+            numColumns--;
+            lastColumn--;
+            clearBoard();
+        }
     }
 
     public void addRow() {
-        numRows++;
-        lastRow++;
-        clearBoard();
+        Boolean b = restTemplate().postForObject(createURLWithPort("/add/row"), null, Boolean.class);
+        if (b) {
+            numRows++;
+            lastRow++;
+            clearBoard();
+        }
     }
 
     public void removeRow() {
-        numRows--;
-        lastRow--;
-        clearBoard();
+        Boolean b = restTemplate().postForObject(createURLWithPort("/remove/row"), null, Boolean.class);
+        if (b) {
+            numRows--;
+            lastRow--;
+            clearBoard();
+        }
     }
 
     public void reset() {
-        numRows = 8;
-        lastRow = numRows + 1;
-        numColumns = 8;
-        lastColumn = numColumns + 1;
-        clearBoard();
+        Boolean b = restTemplate().postForObject(createURLWithPort("/reset"), null, Boolean.class);
+        if (b) {
+            numRows = 8;
+            lastRow = numRows + 1;
+            numColumns = 8;
+            lastColumn = numColumns + 1;
+            clearBoard();
+        }
     }
 
     private void clearBoard() {
