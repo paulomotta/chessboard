@@ -41,4 +41,10 @@ public class ChessboardController {
     public Boolean addColumn(){
         return board.addColumn();
     }
+    
+    @PostMapping("/remove/column")
+    @ResponseBody
+    public Boolean removeColumn(){
+        return board.removeColumn();
+    }
 }

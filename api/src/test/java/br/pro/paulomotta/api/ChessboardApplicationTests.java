@@ -1,5 +1,6 @@
 package br.pro.paulomotta.api;
 
+import br.pro.paulomotta.poc.Chessboard;
 import java.util.List;
 
 import org.junit.Test;
@@ -67,7 +68,7 @@ public class ChessboardApplicationTests {
     }
     
     @Test
-    public void testAddColumn() throws JSONException {
+    public void testAddRemoveColumn() throws JSONException {
 
         HttpEntity<String> entity = new HttpEntity<String>(null, headers);
 
@@ -76,6 +77,66 @@ public class ChessboardApplicationTests {
                 HttpMethod.POST, entity, Boolean.class);
 
         Boolean expected = true;
+
+        Boolean b = response.getBody();
+        System.out.println("s="+b);
+        assertEquals(expected, b);
+        
+        response = testRestTemplate.exchange(
+                createURLWithPort("/remove/column"),
+                HttpMethod.POST, entity, Boolean.class);
+
+        expected = true;
+
+        b = response.getBody();
+        System.out.println("s="+b);
+        assertEquals(expected, b);
+    }
+    
+    @Test
+    public void testAddRemoveManyColumn() throws JSONException {
+
+        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+
+        for(int i=Chessboard.MIN_COLUMNS; i < Chessboard.MAX_COLUMNS; i++){
+            ResponseEntity<Boolean> response = testRestTemplate.exchange(
+                    createURLWithPort("/add/column"),
+                    HttpMethod.POST, entity, Boolean.class);
+
+            Boolean expected = true;
+
+            Boolean b = response.getBody();
+            System.out.println("s="+b);
+            assertEquals(expected, b);
+        }
+        
+        ResponseEntity<Boolean> lastResponse = testRestTemplate.exchange(
+                    createURLWithPort("/add/column"),
+                    HttpMethod.POST, entity, Boolean.class);
+
+        Boolean lastExpected = false;
+
+        Boolean lastBody = lastResponse.getBody();
+        System.out.println("s="+lastBody);
+        assertEquals(lastExpected, lastBody);
+        
+        for(int i=Chessboard.MIN_COLUMNS; i < Chessboard.MAX_COLUMNS; i++){
+            ResponseEntity<Boolean> response = testRestTemplate.exchange(
+                    createURLWithPort("/remove/column"),
+                    HttpMethod.POST, entity, Boolean.class);
+
+            Boolean expected = true;
+
+            Boolean b = response.getBody();
+            System.out.println("s="+b);
+            assertEquals(expected, b);
+        }
+        
+        ResponseEntity<Boolean> response = testRestTemplate.exchange(
+                    createURLWithPort("/remove/column"),
+                    HttpMethod.POST, entity, Boolean.class);
+
+        Boolean expected = false;
 
         Boolean b = response.getBody();
         System.out.println("s="+b);
