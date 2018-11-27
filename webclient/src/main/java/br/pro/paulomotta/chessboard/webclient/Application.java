@@ -12,6 +12,8 @@ import org.springframework.context.annotation.ComponentScan;
 import javax.faces.webapp.FacesServlet;
 import javax.servlet.DispatcherType;
 import java.util.EnumSet;
+import org.springframework.boot.builder.SpringApplicationBuilder;
+
 /**
  *
  * @author paulo
@@ -19,6 +21,11 @@ import java.util.EnumSet;
 @EnableAutoConfiguration
 @ComponentScan({"br.pro.paulomotta.chessboard.webclient"})
 public class Application extends SpringBootServletInitializer {
+
+    @Override
+    protected SpringApplicationBuilder configure(SpringApplicationBuilder application) {
+        return application.sources(Application.class);
+    }
 
     public static void main(String[] args) {
         SpringApplication.run(Application.class, args);
