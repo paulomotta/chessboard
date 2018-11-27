@@ -11,10 +11,9 @@ import java.util.List;
 public class Chessboard {
 
     public static final int MIN_COLUMNS = 8;
-    public static final int MAX_COLUMNS = 25;
+    public static final int MAX_COLUMNS = 26;
     public static final int MIN_ROWS = 8;
-    public static final int MAX_ROWS = 25;
-
+    public static final int MAX_ROWS = 26;
     int columns = MIN_COLUMNS;
     int rows = MIN_ROWS;
     
