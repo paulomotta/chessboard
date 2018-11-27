@@ -58,6 +58,12 @@ public class Chessboard {
         }
     }
 
+    public boolean reset(){
+        this.rows = MIN_ROWS;
+        this.columns = MIN_COLUMNS;
+        return true;
+    }
+    
     public List<Position> possibleMoves(String start, String piece, int depth) {
         if (start == null || piece == null || start.length() < 1 || piece.length() < 1) {
             throw new IllegalArgumentException("Invalid start [" + start + "] or piece ["+piece+"]");
