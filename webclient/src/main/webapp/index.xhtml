@@ -1,0 +1,36 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:f="http://java.sun.com/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <table style="background-color: lightgray">
+
+                <c:forEach var = "row" items="#{chessboardBean.rows}">
+                    <tr>
+                        <c:forEach var = "cell" items="#{row.row}">
+                            <td>
+                                <h:commandButton actionListener="#{chessboardBean.moves(cell.name)}" value="#{cell.name}" rendered="#{!cell.label}" style="background-color: #{cell.bgColor}; color: #{cell.textColor}" />
+                                <h:outputText value="#{cell.name}" rendered="#{cell.label}" style="background-color: #{cell.bgColor}" />
+                            </td>
+                        </c:forEach>
+                    </tr>
+                </c:forEach>
+
+            </table>
+                        
+            <h:commandButton actionListener="#{chessboardBean.addColumn()}" value="Add Column" /><br/>
+            <h:commandButton actionListener="#{chessboardBean.removeColumn()}" value="Remove Column" /><br/>
+            <h:commandButton actionListener="#{chessboardBean.addRow()}" value="Add Row" /><br/>
+            <h:commandButton actionListener="#{chessboardBean.removeRow()}" value="Remove Row" /><br/><br/>
+            <h:commandButton actionListener="#{chessboardBean.reset()}" value="Reset Board" /><br/>
+        </h:form>
+    </h:body>
+</html>
+
