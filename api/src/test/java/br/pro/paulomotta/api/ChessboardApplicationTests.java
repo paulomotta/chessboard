@@ -1,5 +1,7 @@
 package br.pro.paulomotta.api;
 
+import br.pro.paulomotta.api.repository.RequestRepository;
+import br.pro.paulomotta.api.model.Request;
 import br.pro.paulomotta.poc.Chessboard;
 import java.util.List;
 
@@ -15,6 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.assertj.core.api.BDDAssertions.then;
 import org.json.JSONException;
+import org.junit.After;
 import static org.junit.Assert.assertEquals;
 import org.skyscreamer.jsonassert.JSONAssert;
 import org.springframework.http.HttpEntity;
@@ -35,7 +38,18 @@ public class ChessboardApplicationTests {
     @Autowired
     private TestRestTemplate testRestTemplate;
     
+    @Autowired
+    RequestRepository repo;
+    
     HttpHeaders headers = new HttpHeaders();
+    
+    @After
+    public void tearDown() {
+        Iterable<Request> iter = repo.findAll();
+        for(Request r : iter){
+            System.out.println(r);
+        }
+    }
 
     @Test
     public void shouldReturn200WhenSendingRequestToController() throws Exception {
