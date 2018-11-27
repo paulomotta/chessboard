@@ -59,4 +59,10 @@ public class ChessboardController {
     public Boolean removeRow(){
         return board.removeRow();
     }
+    
+    @PostMapping("/reset")
+    @ResponseBody
+    public Boolean reset(){
+        return board.reset();
+    }
 }
