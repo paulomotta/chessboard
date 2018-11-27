@@ -143,4 +143,79 @@ public class ChessboardApplicationTests {
         assertEquals(expected, b);
     }
 
+    @Test
+    public void testAddRemoveRow() throws JSONException {
+
+        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+
+        ResponseEntity<Boolean> response = testRestTemplate.exchange(
+                createURLWithPort("/add/row"),
+                HttpMethod.POST, entity, Boolean.class);
+
+        Boolean expected = true;
+
+        Boolean b = response.getBody();
+        System.out.println("s="+b);
+        assertEquals(expected, b);
+        
+        response = testRestTemplate.exchange(
+                createURLWithPort("/remove/row"),
+                HttpMethod.POST, entity, Boolean.class);
+
+        expected = true;
+
+        b = response.getBody();
+        System.out.println("s="+b);
+        assertEquals(expected, b);
+    }
+    
+    @Test
+    public void testAddRemoveManyRow() throws JSONException {
+
+        HttpEntity<String> entity = new HttpEntity<String>(null, headers);
+
+        for(int i=Chessboard.MIN_ROWS; i < Chessboard.MAX_ROWS; i++){
+            ResponseEntity<Boolean> response = testRestTemplate.exchange(
+                    createURLWithPort("/add/row"),
+                    HttpMethod.POST, entity, Boolean.class);
+
+            Boolean expected = true;
+
+            Boolean b = response.getBody();
+            System.out.println("s="+b);
+            assertEquals(expected, b);
+        }
+        
+        ResponseEntity<Boolean> lastResponse = testRestTemplate.exchange(
+                    createURLWithPort("/add/row"),
+                    HttpMethod.POST, entity, Boolean.class);
+
+        Boolean lastExpected = false;
+
+        Boolean lastBody = lastResponse.getBody();
+        System.out.println("s="+lastBody);
+        assertEquals(lastExpected, lastBody);
+        
+        for(int i=Chessboard.MIN_ROWS; i < Chessboard.MAX_ROWS; i++){
+            ResponseEntity<Boolean> response = testRestTemplate.exchange(
+                    createURLWithPort("/remove/row"),
+                    HttpMethod.POST, entity, Boolean.class);
+
+            Boolean expected = true;
+
+            Boolean b = response.getBody();
+            System.out.println("s="+b);
+            assertEquals(expected, b);
+        }
+        
+        ResponseEntity<Boolean> response = testRestTemplate.exchange(
+                    createURLWithPort("/remove/row"),
+                    HttpMethod.POST, entity, Boolean.class);
+
+        Boolean expected = false;
+
+        Boolean b = response.getBody();
+        System.out.println("s="+b);
+        assertEquals(expected, b);
+    }
 }
